@@ -4,12 +4,12 @@ from Silla import Silla
 class Sala:
     def __init__(self, idSala, nombrePeli, salaPremium, row, col):
         # row y col para definir las dimensiones de la sala
-        self.row = row
-        self.col = col
         self.idSala = idSala
         self.nombrePeli = nombrePeli
         self.salaPremium = salaPremium
         self.sillasSala = []
+        self.row = row
+        self.col = col
         # Crea la sala como una lista de listas de objetos Silla
         for rows in range(1, self.row + 1):
             rowLista = []
@@ -45,6 +45,7 @@ class Sala:
                 rowLista.append(sillaNombre)
             print(rowLista)
 
+    # Busca una silla por su ID y corre el método setComprado de el objeto Silla
     def comprarSilla(self, idSilla):
         for row in self.sillasSala:
             for silla in row:
@@ -59,6 +60,7 @@ class Sala:
                 if getId.lower() == idSilla.lower():
                     silla.setVacio()
 
+    # Busca una silla por su Id y nos indica su posición y si esta ocupada o no
     def infoSilla(self, idSilla):
         for row in self.sillasSala:
             for silla in row:

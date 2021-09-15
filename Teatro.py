@@ -6,18 +6,20 @@ class Teatro:
     def __init__(self):
         self.salasTeatro = []
 
-    # Solo busca por nombre de pelicula, retorna un print con la información de la sala
+    # Solo busca por nombre de pelicula, retorna un print con la información de la sala y el objeto sala
     def searchSala(self, nomPelicula):
         for sala in self.salasTeatro:
             peliculaL = sala.getNomPelicula()
             if peliculaL.lower() == nomPelicula.lower():
                 if sala.getSalaPremium() == True:
-                    print("El id de la sala es: ", sala.getIdSala(), "|  El nombre de la pelicula es: ",
+                    print("El id de la sala es: ", sala.getIdSala(), "|  El nombre de la película es: ",
                           sala.getNomPelicula(), "|  La sala es premium")
+                    return sala
                 else:
-                    print("El id de la sala es: ", sala.getIdSala(), "|  El nombre de la pelicula es: ",
+                    print("El id de la sala es: ", sala.getIdSala(), "|  El nombre de la película es: ",
                           sala.getNomPelicula(), "|  La sala no es premium")
-
+                    return sala
+    # Busca por Id de sala y devuelve el objeto sala
     def searchSalaId(self, idSala):
         for sala in self.salasTeatro:
             id = sala.getIdSala()
@@ -31,7 +33,7 @@ class Teatro:
             pelicula = sala.getNomPelicula()
             listaPelicula.append(pelicula)
         # Usamos set() para remover películas duplicadas
-        return set(listaPelicula)
+        print(set(listaPelicula))
 
     # Añade salas al teatro
     def addSala(self, idSala, nomPeli, salaPremium, row, col):
@@ -55,7 +57,7 @@ class Teatro:
 
             ''')
             ###########################################################################################################
-            # Opciones de metodos de teatro
+            # Opciones de métodos de teatro
             print("Input 1 para showPelicula()")
             print("Input 2 para searchSala(nomPelicula)")
             print("Input 3 para entrar a la sala searchSalaId(salaId) (comprar, ver sillas disponibles etc)")
@@ -68,7 +70,7 @@ class Teatro:
             # searchSala(idSala)
             elif x == "2":
                 # pedimos un input para idSala
-                nomPelicula = input("Digite el nombre de pelicula: ")
+                nomPelicula = input("Digite el nombre de película: ")
                 self.searchSala(nomPelicula)
             # searchSalaId
             elif x == "3":
