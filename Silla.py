@@ -32,3 +32,4 @@ class Silla:
     def setVacio(self):
         self.sillaOcupada = False
         self.nombreSilla = self.idSilla
+

@@ -43,17 +43,20 @@ class Sala:
     def comprarSilla(self, idSilla):
         for row in self.sillasSala:
             for silla in row:
-                if silla.getIdSilla() == idSilla:
+                getId = silla.getIdSilla()
+                if getId.lower() == idSilla.lower():
                     silla.setComprado()
-    def vaciarSila(self, idSilla):
+    def vaciarSilla(self, idSilla):
         for row in self.sillasSala:
             for silla in row:
-                if silla.getIdSilla() == idSilla:
+                getId = silla.getIdSilla()
+                if getId.lower() == idSilla.lower():
                     silla.setVacio()
     def infoSilla(self, idSilla):
         for row in self.sillasSala:
             for silla in row:
-                if silla.getIdSilla() == idSilla:
+                getId = silla.getIdSilla()
+                if getId.lower() == idSilla.lower():
                     if silla.getSillaOcupada()  == True:
                         print("La silla ", idSilla, ' se ubica en la fila ', silla.getRow(), ' y columna ', silla.getColumn(), ' Esta OCUPADA')
                     else:
