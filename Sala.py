@@ -1,11 +1,11 @@
 from Silla import Silla
-
+from Pelicula import Pelicula
 
 class Sala:
-    def __init__(self, idSala, nombrePeli, salaPremium, row, col):
+    def __init__(self, idSala, nombrePeli, duracionPeli,genero, ageRating, salaPremium, row, col):
         # row y col para definir las dimensiones de la sala
         self.idSala = idSala
-        self.nombrePeli = nombrePeli
+        self.pelicula = Pelicula(nombrePeli, duracionPeli, genero, ageRating )
         self.salaPremium = salaPremium
         self.sillasSala = []
         self.row = row
@@ -22,14 +22,16 @@ class Sala:
     def getIdSala(self):
         return self.idSala
 
-    def getNomPelicula(self):
-        return self.nombrePeli
-
     def getSillasSala(self):
         return self.sillasSala
 
     def getSalaPremium(self):
         return self.salaPremium
+
+    #gets de Pelicula
+
+    def getPelicula(self):
+        return self.pelicula
 
     ########################################################
     # Imprime las sillas por su nombre, si la silla esta llena aparece como 'XX'
@@ -59,6 +61,10 @@ class Sala:
                 getId = silla.getIdSilla()
                 if getId.lower() == idSilla.lower():
                     silla.setVacio()
+    def vaciarSala(self):
+        for row in self.sillasSala:
+            for silla in row:
+                silla.setVacio()
 
     # Busca una silla por su Id y nos indica su posición y si esta ocupada o no
     def infoSilla(self, idSilla):

@@ -1,24 +1,24 @@
 from Sala import Sala
-from Silla import Silla
 
 
 class Teatro:
-    def __init__(self):
+    def __init__(self, nombreTeatro, ciudadTeatro):
         self.salasTeatro = []
+        self.nombreTeatro = nombreTeatro
+        self.ciudadTeatro = ciudadTeatro
 
     # Solo busca por nombre de pelicula, retorna un print con la información de la sala y el objeto sala
     def searchSala(self, nomPelicula):
         for sala in self.salasTeatro:
-            peliculaL = sala.getNomPelicula()
-            if peliculaL.lower() == nomPelicula.lower():
+            pelicula = sala.getPelicula()
+            nombre = pelicula.getNombrePeli()
+            if nombre.lower() == nomPelicula.lower():
                 if sala.getSalaPremium() == True:
                     print("El id de la sala es: ", sala.getIdSala(), "|  El nombre de la película es: ",
                           sala.getNomPelicula(), "|  La sala es premium")
-                    return sala
                 else:
                     print("El id de la sala es: ", sala.getIdSala(), "|  El nombre de la película es: ",
                           sala.getNomPelicula(), "|  La sala no es premium")
-                    return sala
     # Busca por Id de sala y devuelve el objeto sala
     def searchSalaId(self, idSala):
         for sala in self.salasTeatro:
@@ -27,11 +27,12 @@ class Teatro:
                 return sala
 
     # Muestra todas las películas del teatro
-    def showPelicula(self):
+    def showPeliculas(self):
         listaPelicula = []
         for sala in self.salasTeatro:
-            pelicula = sala.getNomPelicula()
-            listaPelicula.append(pelicula)
+            pelicula = sala.getPelicula()
+            nomPelicula = pelicula.nombrePeli
+            listaPelicula.append(nomPelicula)
         # Usamos set() para remover películas duplicadas
         print(set(listaPelicula))
 
@@ -41,21 +42,11 @@ class Teatro:
         self.salasTeatro.append(sala1)
 
     # Menu
+    '''
     def menu(self):
         i = 0
         while i < 1:
             # ASCII de Teatro
-            print()
-            print()
-            print('''\
-                ████████╗███████╗ █████╗ ████████╗██████╗  ██████╗ 
-                ╚══██╔══╝██╔════╝██╔══██╗╚══██╔══╝██╔══██╗██╔═══██╗
-                   ██║   █████╗  ███████║   ██║   ██████╔╝██║   ██║
-                   ██║   ██╔══╝  ██╔══██║   ██║   ██╔══██╗██║   ██║
-                   ██║   ███████╗██║  ██║   ██║   ██║  ██║╚██████╔╝
-                   ╚═╝   ╚══════╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ 
-
-            ''')
             ###########################################################################################################
             # Opciones de métodos de teatro
             print("Input 1 para showPelicula()")
@@ -64,9 +55,9 @@ class Teatro:
             print("Input 4 para salir de este menu.")
             print()
             x = input()
-            # showPelicula()
+            # showPeliculas()
             if x == "1":
-                print(self.showPelicula())
+                print(self.showPeliculas())
             # searchSala(idSala)
             elif x == "2":
                 # pedimos un input para idSala
@@ -108,3 +99,4 @@ class Teatro:
                             y = 1
             elif x == "4":
                 i = 1
+'''
