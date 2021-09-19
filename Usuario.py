@@ -1,10 +1,10 @@
 
 class Usuario:
-    def __init__(self, idUsuario, nomUsuario, fechaNacimiento, membresia):
+    def __init__(self, idUsuario, nomUsuario, fechaNacimiento):
         self.idUsuario = idUsuario
         self.nomUsuario = nomUsuario
         self.fechaNachimiento = fechaNacimiento
-        self.membresia =
+
     def getIdUsuario(self):
         return self.idUsuario
     def getNomUsuario(self):

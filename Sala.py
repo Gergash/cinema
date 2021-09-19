@@ -48,7 +48,7 @@ class Sala:
             print(rowLista)
 
     # Busca una silla por su ID y corre el método setComprado de el objeto Silla
-    def comprarSilla(self, idSilla):
+    def comprarSillaSala(self, idSilla):
         for row in self.sillasSala:
             for silla in row:
                 getId = silla.getIdSilla()
