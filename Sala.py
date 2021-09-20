@@ -1,11 +1,12 @@
 from Silla import Silla
 from Pelicula import Pelicula
 
+
 class Sala:
-    def __init__(self, idSala, nombrePeli, duracionPeli,genero, ageRating, salaPremium, row, col):
+    def __init__(self, idSala, nombrePeli, duracionPeli, genero, ageRating, salaPremium, row, col):
         # row y col para definir las dimensiones de la sala
         self.idSala = idSala
-        self.pelicula = Pelicula(nombrePeli, duracionPeli, genero, ageRating )
+        self.pelicula = Pelicula(nombrePeli, duracionPeli, genero, ageRating)
         self.salaPremium = salaPremium
         self.sillasSala = []
         self.row = row
@@ -28,7 +29,14 @@ class Sala:
     def getSalaPremium(self):
         return self.salaPremium
 
-    #gets de Pelicula
+    def getSilla(self, idSilla):
+        for row in self.sillasSala:
+            for silla in row:
+                getId = silla.getIdSilla()
+                if getId.lower() == idSilla.lower():
+                    return silla
+
+    # gets de Pelicula
 
     def getPelicula(self):
         return self.pelicula
@@ -61,6 +69,7 @@ class Sala:
                 getId = silla.getIdSilla()
                 if getId.lower() == idSilla.lower():
                     silla.setVacio()
+
     def vaciarSala(self):
         for row in self.sillasSala:
             for silla in row:

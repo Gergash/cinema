@@ -1,4 +1,7 @@
 from Sala import Sala
+from Usuario import Usuario
+from Vendedor import Vendedor
+from Recibo import Recibo
 
 
 class Teatro:
@@ -43,12 +46,24 @@ class Teatro:
                     print("El id de la sala es: ", sala.getIdSala(), "|  El nombre de la película es: ",
                           nombre, "|  La sala no es premium")
 
-    # Busca por Id de sala y devuelve el objeto sala
+    # Busca por Id de sala y devuelve el objeto
     def searchSalaId(self, idSala):
         for sala in self.salasTeatro:
             id = sala.getIdSala()
             if id == idSala:
                 return sala
+
+    def searchUsuarioId(self, idUsuario):
+        for usuario in self.usuariosTeatro:
+            id = usuario.getIdUsuario()
+            if id == idUsuario:
+                return usuario
+
+    def searchVendedorId(self, idVendedor):
+        for vendedor in self.vendedoresTeatro:
+            id = vendedor.getIdVendedor()
+            if id == idVendedor:
+                return vendedor
 
     # Muestra todas las películas del teatro
     def showPeliculas(self):
@@ -68,12 +83,16 @@ class Teatro:
         self.salasTeatro.append(sala1)
 
     # Añade Vendedores al teatro
-    def addVendedor(self):
+    def addVendedor(self, idVendedor, nomVendedor):
+        Vendedor(idVendedor, nomVendedor)
+
     # Añade Usuarios al teatro
-    def addUsuario(self):
+    def addUsuario(self, idUsuario, nomUsuario, fechaNacimiento):
+        Usuario(idUsuario, nomUsuario, fechaNacimiento)
 
-    # searchUsuarioId, searchVendedorId
-
-
-    def comprarSilla(self, idSala, idSila, idUsuario, idVendedor):
+    def comprarSilla(self, idSala, idSilla, idUsuario, idVendedor):
         sala = self.searchSalaId(idSala)
+        silla = sala.getSilla(idSilla)
+        usuario = self.searchUsuarioId(idUsuario)
+        vendedor = self.searchVendedorId(idVendedor)
+        Recibo
