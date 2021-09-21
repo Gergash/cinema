@@ -1,13 +1,15 @@
+from TipoMem import TipoMem
 
 class Usuario:
-    def __init__(self, idUsuario, nomUsuario, fechaNacimiento):
+    def __init__(self, idUsuario, nomUsuario, tipoMem):
         self.idUsuario = idUsuario
         self.nomUsuario = nomUsuario
-        self.fechaNachimiento = fechaNacimiento
-
+        self.tipoMem = tipoMem
     def getIdUsuario(self):
         return self.idUsuario
     def getNomUsuario(self):
         return self.nomUsuario
-    def getFechaNacimiento(self):
-        return self.fechaNachimiento
+    def getTipoMem(self):
+        return self.tipoMem
+
+

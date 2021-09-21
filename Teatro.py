@@ -1,6 +1,7 @@
 from Sala import Sala
 from Usuario import Usuario
 from Vendedor import Vendedor
+from TipoMem import TipoMem
 from Recibo import Recibo
 
 
@@ -13,6 +14,7 @@ class Teatro:
         self.salasTeatro = []
         self.usuariosTeatro = []
         self.vendedoresTeatro = []
+        self.recibosTeatro = []
 
     # gets
     def getNombreTeatro(self):
@@ -32,6 +34,8 @@ class Teatro:
 
     def getUsuariosTeatro(self):
         return self.usuariosTeatro
+    def getIdTeatro(self):
+        return self.idTeatro
 
     # Solo busca por nombre de pelicula, retorna un print con la información de la sala y el objeto sala
     def searchSala(self, nomPelicula):
@@ -84,15 +88,42 @@ class Teatro:
 
     # Añade Vendedores al teatro
     def addVendedor(self, idVendedor, nomVendedor):
-        Vendedor(idVendedor, nomVendedor)
+        vendedor = Vendedor(idVendedor, nomVendedor)
+        self.vendedoresTeatro.append(vendedor)
 
     # Añade Usuarios al teatro
-    def addUsuario(self, idUsuario, nomUsuario, fechaNacimiento):
-        Usuario(idUsuario, nomUsuario, fechaNacimiento)
+    def addUsuario(self, idUsuario, nomUsuario, tipoMem):
+        usuario = Usuario(idUsuario, nomUsuario, tipoMem)
+        self.usuariosTeatro.append(usuario)
 
-    def comprarSilla(self, idSala, idSilla, idUsuario, idVendedor):
-        sala = self.searchSalaId(idSala)
-        silla = sala.getSilla(idSilla)
+
+    #ventas
+    def iniciarCompra(self, idUsuario, idVendedor):
         usuario = self.searchUsuarioId(idUsuario)
         vendedor = self.searchVendedorId(idVendedor)
-        Recibo
+        global recibo
+        recibo = Recibo(usuario, vendedor, self)
+        global contVenta
+        contVenta = 1
+
+    def comprarSilla(self, idSala, idSilla):
+        sala = self.searchSalaId(idSala)
+        silla = sala.getSilla(idSilla)
+        global recibo
+        if contVenta == 1:
+            sala = self.searchSalaId(idSala)
+            sala.comprarSillaSala(idSilla)
+            recibo.compraSilla(sala, silla)
+        else :
+            print('Porfavor inicie la compra con iniciarCompra()')
+
+    def terminarCompra(self):
+        global contVenta
+        global recibo
+        contVenta = 0
+        recibo.terminarRecibo()
+        self.recibosTeatro.append(recibo)
+        recibo = 0
+
+
+
