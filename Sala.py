@@ -1,16 +1,17 @@
 from Silla import Silla
-from Pelicula import Pelicula
+from Horario import Horario
 
 
 class Sala:
-    def __init__(self, idSala, nombrePeli, duracionPeli, genero, ageRating, salaPremium, row, col):
+    def __init__(self, idSala, salaPremium, row, col):
         # row y col para definir las dimensiones de la sala
         self.idSala = idSala
-        self.pelicula = Pelicula(nombrePeli, duracionPeli, genero, ageRating)
         self.salaPremium = salaPremium
         self.sillasSala = []
         self.row = row
         self.col = col
+        self.horariosSala = []
+        self.taquillaSala = row * col
         # Crea la sala como una lista de listas de objetos Silla
         for rows in range(1, self.row + 1):
             rowLista = []
@@ -36,10 +37,12 @@ class Sala:
                 if getId.lower() == idSilla.lower():
                     return silla
 
-    # gets de Pelicula
+    def getHorarios(self):
+        return self.horariosSala
 
-    def getPelicula(self):
-        return self.pelicula
+    def getTaquilla(self):
+        return self.taquillaSala
+
 
     ########################################################
     # Imprime las sillas por su nombre, si la silla esta llena aparece como 'XX'
@@ -88,3 +91,7 @@ class Sala:
                         print("La silla ", idSilla, ' se ubica en la fila ', silla.getRow(), ' y columna ',
                               silla.getColumn(),
                               '  Esta VACIA')
+
+    def addHorario(self, horaInicio, horaCierre, nombrePeli, duracionPeli, genero, ageRating ):
+        horario = Horario(horaInicio,horaCierre,nombrePeli,duracionPeli,genero,ageRating)
+        self.horariosSala.append(horario)

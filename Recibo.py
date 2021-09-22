@@ -1,12 +1,11 @@
-import uuid
 from TipoMem import TipoMem
 
 class Recibo:
-    def __init__(self, usuario, vendedor, teatro):
+    def __init__(self, idRecibo, usuario, vendedor, teatro):
         self.usuario = usuario
         self.vendedor = vendedor
         self.teatro = teatro
-        self.idRecibo = str(uuid.uuid1())
+        self.idRecibo = idRecibo
         self.infoRecibo = []
         self.precioTotal = 0
         self.precioTeatro = teatro.getPrecioTeatro()
@@ -20,6 +19,7 @@ class Recibo:
         stringVendedor = "Vendedor " + vendedor.getNomVendedor() + " " + vendedor.getIdVendedor()
         self.infoRecibo.append(stringVendedor)
         stringUsuario = "Usuario " + usuario.getNomUsuario() + " " + usuario.getIdUsuario()
+        self.infoRecibo.append(stringUsuario)
 
     def compraSilla(self, sala, silla):
         precioCompraSilla = self.precioTeatro
@@ -34,10 +34,17 @@ class Recibo:
             precioCompraSilla = precioCompraSilla * 0.5
         self.precioTotal = self.precioTotal + precioCompraSilla
         pelicula = sala.getPelicula()
-        stringSilla = "Sala " + sala.getIdSala() + " " + pelicula.getNombrePeli() + " Silla " + silla.getIdSilla() + " " + str(precioCompraSilla) + " COP"
+        stringSilla = "Sala " + sala.getIdSala() + " Silla " + silla.getIdSilla() + " " + str(precioCompraSilla) + " COP"
         self.infoRecibo.append(stringSilla)
+
     def terminarRecibo(self):
         precioTotalString = "Precio Total: " + str(self.precioTotal) + " COP"
         self.infoRecibo.append(precioTotalString)
         for x in self.infoRecibo:
             print(x)
+    def getIdRecibo(self):
+        return self.idRecibo
+    def getInfoRecibo(self):
+        return self.infoRecibo
+    def getPrecioTotal(self):
+        return self.precioTotal

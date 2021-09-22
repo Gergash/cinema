@@ -34,28 +34,35 @@ class Teatro:
 
     def getUsuariosTeatro(self):
         return self.usuariosTeatro
+
     def getIdTeatro(self):
         return self.idTeatro
 
-    # Solo busca por nombre de pelicula, retorna un print con la información de la sala y el objeto sala
-    def searchSala(self, nomPelicula):
-        for sala in self.salasTeatro:
-            pelicula = sala.getPelicula()
-            nombre = pelicula.getNombrePeli()
-            if nombre.lower() == nomPelicula.lower():
-                if sala.getSalaPremium() == True:
-                    print("El id de la sala es: ", sala.getIdSala(), "|  El nombre de la película es: ",
-                          nombre, "|  La sala es premium")
-                else:
-                    print("El id de la sala es: ", sala.getIdSala(), "|  El nombre de la película es: ",
-                          nombre, "|  La sala no es premium")
-
     # Busca por Id de sala y devuelve el objeto
-    def searchSalaId(self, idSala):
+    def getSala(self, idSala):
         for sala in self.salasTeatro:
             id = sala.getIdSala()
             if id == idSala:
                 return sala
+
+    def searchSala(self, nomPelicula):
+        for sala in self.salasTeatro:
+            for horario in sala.getHorarios():
+                pelicula = horario.getPelicula()
+                nombrePelicula = pelicula.getNombrePeli()
+                if nomPelicula.lower() == nombrePelicula.lower():
+                    print("Sala ", sala.getIdSala(), ' Aforo ', sala.getTaquilla())
+                    print(horario.getHoraInicio(), " ", horario.getHoraCierre(), " Pelicula: ", nombrePelicula )
+
+    def infoSala(self, idSala):
+        for sala in self.salasTeatro:
+            id = sala.getIdSala()
+            if id == idSala:
+                print('Sala ', idSala, ' Aforo: ', sala.getTaquilla())
+                for horario in sala.getHorarios():
+                    pelicula = horario.getPelicula()
+                    print(horario.getHoraInicio(), " ", horario.getHoraCierre(), " Pelicula: ", pelicula.getNombrePeli())
+
 
     def searchUsuarioId(self, idUsuario):
         for usuario in self.usuariosTeatro:
@@ -69,21 +76,9 @@ class Teatro:
             if id == idVendedor:
                 return vendedor
 
-    # Muestra todas las películas del teatro
-    def showPeliculas(self):
-        listaPelicula = []
-        for sala in self.salasTeatro:
-            pelicula = sala.getPelicula()
-            nomPelicula = pelicula.nombrePeli
-            listaPelicula.append(nomPelicula)
-        # Usamos set() para remover películas duplicadas
-        listaPelicula = set(listaPelicula)
-        for pelicula in listaPelicula:
-            print(pelicula)
-
     # Añade salas al teatro
-    def addSala(self, idSala, nomPeli, duracionPeli, genero, ageRating, salaPremium, row, col):
-        sala1 = Sala(idSala, nomPeli, duracionPeli, genero, ageRating, salaPremium, row, col)
+    def addSala(self, idSala, salaPremium, row, col):
+        sala1 = Sala(idSala, salaPremium, row, col)
         self.salasTeatro.append(sala1)
 
     # Añade Vendedores al teatro
@@ -103,24 +98,20 @@ class Teatro:
         vendedor = self.searchVendedorId(idVendedor)
         global recibo
         recibo = Recibo(usuario, vendedor, self)
-        global contVenta
-        contVenta = 1
+
 
     def comprarSilla(self, idSala, idSilla):
         sala = self.searchSalaId(idSala)
         silla = sala.getSilla(idSilla)
         global recibo
-        if contVenta == 1:
-            sala = self.searchSalaId(idSala)
-            sala.comprarSillaSala(idSilla)
-            recibo.compraSilla(sala, silla)
-        else :
-            print('Porfavor inicie la compra con iniciarCompra()')
+        sala = self.searchSalaId(idSala)
+        sala.comprarSillaSala(idSilla)
+        recibo.compraSilla(sala, silla)
+
 
     def terminarCompra(self):
         global contVenta
         global recibo
-        contVenta = 0
         recibo.terminarRecibo()
         self.recibosTeatro.append(recibo)
         recibo = 0
